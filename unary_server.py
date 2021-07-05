@@ -20,13 +20,14 @@ class UnaryService(pb2_grpc.UnaryServicer):
 		return pb2.MessageResponse(**result)
 
 
-def serve():
+def serve(port):
+	bind_address = f"[::]:{port}"
 	server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
 	pb2_grpc.add_UnaryServicer_to_server(UnaryService(), server)
-	server.add_insecure_port('[::]:50051')
+	server.add_insecure_port(bind_address)
 	server.start()
 	server.wait_for_termination()
 
 
 if __name__ == '__main__':
-	serve()
+	serve(50051)

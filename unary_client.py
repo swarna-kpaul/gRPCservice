@@ -29,7 +29,7 @@ class UnaryClient(object):
 
 
 if __name__ == '__main__':
-	client = UnaryClient()
+	client = UnaryClient(host='localhost')
 	result = client.get_url(message="Hello Server you there?")
 	print(f'{result}')
 	result = client.get_url(message="Thanks for being there?")
